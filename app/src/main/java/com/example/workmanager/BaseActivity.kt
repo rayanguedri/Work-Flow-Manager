@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 
 open class BaseActivity : AppCompatActivity() {
@@ -57,6 +59,17 @@ fun showProgressDialog(text: String) {
         Toast.makeText(this, resources.getString(R.string.click_again_to_exit), Toast.LENGTH_SHORT).show()
 
 
+
+    }
+
+    fun showErrorSnackBar(message: String) {
+        val snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+        val snackBarView = snackbar.view
+        snackBarView.setBackgroundColor(
+            ContextCompat.getColor(this, R.color.snackbar_error_color
+            )
+        )
+        snackbar.show()
 
     }
 
