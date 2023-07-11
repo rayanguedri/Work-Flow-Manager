@@ -4,9 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import kotlin.math.log
 
 class SignInActivity : BaseActivity() {
 
@@ -57,14 +60,16 @@ class SignInActivity : BaseActivity() {
             .addOnCompleteListener(this) { task ->
                 hideProgressDialog()
                 if (task.isSuccessful) {
-                    showErrorSnackBar("Sign in successful")
+                    Log.d("Sign in", "signInWithEmail:success")
                     val user = auth.currentUser
                     val intent2 = Intent(this, MainActivity::class.java)
                     startActivity(intent2)
 
                     //updateUI(user)
                 } else {
-                    showErrorSnackBar("Sign in failed")
+                    Log.w("Sign in", "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
                     //updateUI(null)
                 }
             }
