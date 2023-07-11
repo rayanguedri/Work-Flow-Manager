@@ -13,14 +13,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 class SignUpActivity : BaseActivity() {
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
-
+        val signupbutton: Button = findViewById(R.id.confirmButton)
+        signupbutton.setOnClickListener {
+            registerUser()
+        }
 
     }
 
@@ -48,18 +47,47 @@ class SignUpActivity : BaseActivity() {
     }
 
 
-    private fun registerUser() {
-        var signupbutton: Button = findViewById(R.id.confirmButton)
-        var textname: EditText = findViewById(R.id.nameEditText)
-        var textemail: EditText = findViewById(R.id.emailEditText)
-        var textpassword: EditText = findViewById(R.id.passwordEditText)
 
-        val name: String = textname.text.toString().trim{ it <= ' '}
-        val email: String = textemail.text.toString().trim{ it <= ' '}
-        val password: String = textpassword.text.toString().trim{ it <= ' '}
 
+       private fun registerUser() {
+
+         val textname:     EditText = findViewById(R.id.nameEditText)
+         val textemail:    EditText = findViewById(R.id.emailEditText)
+         val textpassword: EditText = findViewById(R.id.passwordEditText)
+         val name: String = textname.text.toString().trim{ it <= ' '}
+         val email: String = textemail.text.toString().trim{ it <= ' '}
+         val password: String = textpassword.text.toString().trim{ it <= ' '}
         if (validateForm(name, email, password)) {
-            Toast.makeText(this, "Form is valid", Toast.LENGTH_SHORT).show()
+
+            showProgressDialog("Please wait")
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    hideProgressDialog()
+                    if (task.isSuccessful) {
+                        val firebaseUser: FirebaseUser = task.result!!.user!!
+                        val registeredEmail = firebaseUser.email!!
+                        Toast.makeText(
+                            this,
+                            "$name you have successfully registered the email address $registeredEmail",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                        FirebaseAuth.getInstance().signOut()
+                        finish()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            task.exception!!.message.toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
+                }
+
         }
 
-}}
+    }
+
+
+
+}

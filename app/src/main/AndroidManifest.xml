@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkManager"
         tools:targetApi="31">
+
         <activity
             android:name=".BaseActivity"
             android:exported="false" />
@@ -28,7 +29,10 @@
         <activity
             android:name=".IntroActivity"
             android:exported="true"
-            android:theme="@style/Theme.WorkManager.NoActionBar" />
+            android:theme="@style/Theme.WorkManager.NoActionBar" >
+
+    </activity>
+
         <activity
             android:name=".SplashActivity"
             android:exported="true"
@@ -39,6 +43,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".MainActivity"
