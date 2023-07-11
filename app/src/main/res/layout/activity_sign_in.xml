@@ -7,7 +7,7 @@
     tools:context=".SignInActivity">
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/emailsignin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
@@ -27,10 +27,10 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/passwordEditText"
+        android:id="@+id/passwordsignin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/emailEditText"
+        android:layout_below="@id/emailsignin"
         android:layout_marginTop="20dp"
         android:cursorVisible="true"
         android:ems="10"
@@ -48,13 +48,13 @@
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/signInButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:focusableInTouchMode="true"
         android:focusable="true"
-        android:layout_below="@id/passwordEditText"
+        android:layout_below="@id/passwordsignin"
         android:layout_marginTop="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
@@ -67,7 +67,7 @@
         android:id="@+id/forgotPasswordTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/loginButton"
+        android:layout_below="@id/signInButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Forgot Password?"

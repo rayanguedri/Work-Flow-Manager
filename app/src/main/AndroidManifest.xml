@@ -48,7 +48,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.WorkManager" />
+            android:screenOrientation="fullSensor"
+            android:theme="@style/Theme.WorkManager.NoActionBar"/>
     </application>
 
 </manifest>
