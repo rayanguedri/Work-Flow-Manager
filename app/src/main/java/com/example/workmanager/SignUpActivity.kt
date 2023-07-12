@@ -1,5 +1,6 @@
 package com.example.workmanager
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -68,14 +69,16 @@ class SignUpActivity : BaseActivity() {
                         val registeredEmail = firebaseUser.email!!
                         val user = User(firebaseUser.uid, name, registeredEmail)
                         FireStore().registerUser(this@SignUpActivity, user)
-                        /*Toast.makeText(
+                        Toast.makeText(
                             this,
                             "$name you have successfully registered the email address $registeredEmail",
                             Toast.LENGTH_LONG
                         ).show()
 
-                        FirebaseAuth.getInstance().signOut()
-                        finish()*/
+                       // FirebaseAuth.getInstance().signOut()
+                        intent = Intent(this, SignInActivity::class.java)
+                        startActivity(intent)
+                       // finish()
                     } else {
                         Toast.makeText(
                             this,
