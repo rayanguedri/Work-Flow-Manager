@@ -66,14 +66,16 @@ class SignUpActivity : BaseActivity() {
                     if (task.isSuccessful) {
                         val firebaseUser: FirebaseUser = task.result!!.user!!
                         val registeredEmail = firebaseUser.email!!
-                        Toast.makeText(
+                        val user = User(firebaseUser.uid, name, registeredEmail)
+                        FireStore().registerUser(this@SignUpActivity, user)
+                        /*Toast.makeText(
                             this,
                             "$name you have successfully registered the email address $registeredEmail",
                             Toast.LENGTH_LONG
                         ).show()
 
                         FirebaseAuth.getInstance().signOut()
-                        finish()
+                        finish()*/
                     } else {
                         Toast.makeText(
                             this,
@@ -87,7 +89,16 @@ class SignUpActivity : BaseActivity() {
         }
 
     }
-
+    fun userRegistrationSuccess() {
+        Toast.makeText(
+            this,
+            "You have successfully registered.",
+            Toast.LENGTH_SHORT
+        ).show()
+        hideProgressDialog()
+        FirebaseAuth.getInstance().signOut()
+        finish()
+    }
 
 
 }
