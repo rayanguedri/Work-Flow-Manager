@@ -16,11 +16,17 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         haja = findViewById(R.id.iv_note)
 
+
+
         haja.alpha = 0f
         haja.animate().setDuration(1500).alpha(1f).withEndAction{
-            val i = Intent(this, IntroActivity::class.java)
-            startActivity(i)
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            val currentUserID = FireStore().getCurrentUserID()
+            if(currentUserID.isNotEmpty()){
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+            else{
+                startActivity(Intent(this, IntroActivity::class.java))
+            }
             finish()
         }
 
