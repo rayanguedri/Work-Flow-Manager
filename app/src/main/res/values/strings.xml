@@ -16,4 +16,8 @@
     <string name="please_wait">please_wait</string>
     <string name="required">required</string>
     <string name="mail" />
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_sig_out">Sign Out</string>
+    <string name="image_contentDescription">FLOWER</string>
+
 </resources>
