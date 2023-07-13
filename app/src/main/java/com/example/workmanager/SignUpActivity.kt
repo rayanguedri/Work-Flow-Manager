@@ -20,6 +20,7 @@ class SignUpActivity : BaseActivity() {
         val signupbutton: Button = findViewById(R.id.confirmButton)
         signupbutton.setOnClickListener {
             registerUser()
+
         }
 
     }

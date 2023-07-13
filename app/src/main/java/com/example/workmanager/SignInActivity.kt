@@ -76,6 +76,13 @@ class SignInActivity : BaseActivity() {
 
     }
 
+    fun userSignInSuccess(user: User) {
+        hideProgressDialog()
+        Log.i("Sign in", "signInWithEmail:success")
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
+    }
+
 
 
 }

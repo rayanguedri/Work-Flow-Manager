@@ -26,7 +26,26 @@ class FireStore  {
             }
     }
 
+    fun signInUser(activity: SignInActivity, userInfo:User) {
+        mFireStore.collection(Constants.USERS)
+            .document(getCurrentUserID())
+            .get()
+            .addOnSuccessListener {document ->
+                val loggedInUser = document.toObject(User::class.java)!!
+                activity.userSignInSuccess(loggedInUser)
+            }
+            .addOnFailureListener { e ->
+                activity.hideProgressDialog()
+                Log.e(
+                    activity.javaClass.simpleName,
+                    "Error while signing in the user.",
+                    e
+                )
+            }
+    }
+
     private fun getCurrentUserID(): String {
+        //var currentUser = FirebaseAuth.getInstance().currentUser
         return FirebaseAuth.getInstance().currentUser!!.uid
     }
 
