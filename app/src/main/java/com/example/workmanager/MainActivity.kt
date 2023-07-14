@@ -12,11 +12,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.workmanager.ui.theme.WorkManagerTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            WorkManagerTheme {
+        setContentView(R.layout.activity_main)
+
+
+
+
+
+
+        /* setContent {
+           WorkManagerTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -24,11 +31,11 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Greeting("Android")
                 }
-            }
+            }*/
         }
-    }
-}
 
+}
+/*
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
@@ -42,5 +49,4 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 fun GreetingPreview() {
     WorkManagerTheme {
         Greeting("Android")
-    }
-}
+    }*/

@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:launchMode="standard"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WorkManager"
+        android:theme="@style/AppTheme"
         tools:targetApi="31">
 
         <activity
@@ -21,16 +21,16 @@
             android:name=".SignInActivity"
             android:exported="false"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.WorkManager.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.WorkManager.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".IntroActivity"
             android:exported="true"
-            android:theme="@style/Theme.WorkManager.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar" >
 
     </activity>
 
@@ -38,7 +38,7 @@
             android:name=".SplashActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.WorkManager.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -50,7 +50,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="fullSensor"
-            android:theme="@style/Theme.WorkManager.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
