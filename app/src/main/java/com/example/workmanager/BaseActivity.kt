@@ -19,7 +19,7 @@ open class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
+        //setContentView(R.layout.activity_base)
     }
 
 
@@ -30,11 +30,10 @@ fun showProgressDialog(text: String) {
 
 
     val dialogText = mProgressDialog.findViewById<TextView>(R.id.tv_progress_message)
-
     dialogText.text = text
 
-    mProgressDialog.setCancelable(false)
-    mProgressDialog.setCanceledOnTouchOutside(false)
+  //  mProgressDialog.setCancelable(false)
+   // mProgressDialog.setCanceledOnTouchOutside(false)
 
     mProgressDialog.show()
     }
@@ -58,7 +57,7 @@ fun showProgressDialog(text: String) {
 
         Toast.makeText(this, resources.getString(R.string.click_again_to_exit), Toast.LENGTH_SHORT).show()
 
-
+Handler().postDelayed({doubleBackToExitPressedOnce = false}, 2000)
 
     }
 

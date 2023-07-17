@@ -56,21 +56,18 @@ class SignInActivity : BaseActivity() {
     if (validateForm(email, password)) {
         showProgressDialog(resources.getString(R.string.please_wait))
     }
-        auth.signInWithEmailAndPassword(email, password)
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 hideProgressDialog()
                 if (task.isSuccessful) {
-                    Log.d("Sign in", "signInWithEmail:success")
-                    val user = auth.currentUser
-                    val intent2 = Intent(this, MainActivity::class.java)
-                    startActivity(intent2)
-
-                    //updateUI(user)
+                    FireStore().signInUser(this@SignInActivity)
                 } else {
-                    Log.w("Sign in", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
+
+                    Toast.makeText(
+                        this@SignInActivity,
+                        task.exception!!.message,
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
 

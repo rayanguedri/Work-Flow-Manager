@@ -1,6 +1,8 @@
 package com.example.workmanager
 
+import android.app.Activity
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -26,19 +28,45 @@ class FireStore  {
             }
     }
 
-    fun signInUser(activity: SignInActivity, userInfo:User) {
+    fun signInUser(activity: Activity ) {
         mFireStore.collection(Constants.USERS)
             .document(getCurrentUserID())
             .get()
             .addOnSuccessListener {document ->
+                Log.e(activity.javaClass.simpleName, document.toString())
                 val loggedInUser = document.toObject(User::class.java)!!
-                activity.userSignInSuccess(loggedInUser)
+
+                when(activity) {
+                    is SignInActivity -> {
+                        activity.userSignInSuccess(loggedInUser)
+                    }
+                    is MainActivity -> {
+                        activity.updateNavigationUserDetails(loggedInUser)
+                    }
+                }
             }
             .addOnFailureListener { e ->
-                activity.hideProgressDialog()
+                   when(activity) {
+                        is SignInActivity -> {
+                            Toast.makeText(
+                                activity,
+                                "Error while registering the user.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        is MainActivity -> {
+                            Toast.makeText(
+                                activity,
+                                "Error while registering the user.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+
+
+               }
                 Log.e(
                     activity.javaClass.simpleName,
-                    "Error while signing in the user.",
+                    "Error while registering the user.",
                     e
                 )
             }
