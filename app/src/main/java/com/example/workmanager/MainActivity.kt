@@ -1,52 +1,77 @@
 package com.example.workmanager
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.workmanager.ui.theme.WorkManagerTheme
+import android.view.MenuItem
+import android.widget.Toast
+import android.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : BaseActivity() {
+class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupActionBar()
+        val nav_view: NavigationView = findViewById(R.id.nav_view)
+        nav_view.setNavigationItemSelectedListener(this)
+    }
 
 
 
 
-
-
-        /* setContent {
-           WorkManagerTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }*/
+    private fun setupActionBar() {
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar_main_activity)
+        setSupportActionBar(findViewById(R.id.toolbar_main_activity))
+        toolbar.setNavigationIcon(R.drawable.ic_action_navigation_menu)
+        toolbar.setNavigationOnClickListener {
+            toggleDrawer()
         }
+    }
 
-}
-/*
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello Rayan $name!",
-        modifier = modifier
-    )
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WorkManagerTheme {
-        Greeting("Android")
-    }*/
+    private fun toggleDrawer() {
+        val drawerlayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+
+        if (drawerlayout.isDrawerOpen(GravityCompat.START)) {
+            drawerlayout.closeDrawer(GravityCompat.START)
+        } else {
+            drawerlayout.openDrawer(GravityCompat.START)
+        }
+    }
+
+
+    override fun onBackPressed() {
+        val drawerlayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        super.onBackPressed()
+        if (drawerlayout.isDrawerOpen(GravityCompat.START)) {
+            drawerlayout.closeDrawer(GravityCompat.START)
+        } else {
+            doubleBackToExit()
+        }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_my_profile -> {
+                Toast.makeText(this, "My Profile", Toast.LENGTH_SHORT).show()
+            }
+
+            R.id.nav_sign_out -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, IntroActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            }
+
+        }
+        val drawerlayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        drawerlayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+}
