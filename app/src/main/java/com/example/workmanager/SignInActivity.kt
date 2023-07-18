@@ -13,7 +13,7 @@ import kotlin.math.log
 
 class SignInActivity : BaseActivity() {
 
-     lateinit var auth: FirebaseAuth
+    //private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class SignInActivity : BaseActivity() {
 
 
         val signinButton = findViewById<Button>(R.id.signInButton)
-        auth = FirebaseAuth.getInstance()
+        //auth = FirebaseAuth.getInstance()
         signinButton.setOnClickListener {
             signInRegisteredUser()
         }
@@ -75,8 +75,8 @@ class SignInActivity : BaseActivity() {
 
     fun userSignInSuccess(user: User) {
         hideProgressDialog()
-        Log.i("Sign in", "signInWithEmail:success")
-        startActivity(Intent(this, MainActivity::class.java))
+       // Log.i("Sign in", "signInWithEmail:success")
+        startActivity(Intent(this@SignInActivity, MainActivity::class.java))
         finish()
     }
 

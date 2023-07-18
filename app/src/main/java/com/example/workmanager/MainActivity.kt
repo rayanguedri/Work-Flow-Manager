@@ -21,7 +21,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         setupActionBar()
         val nav_view: NavigationView = findViewById(R.id.nav_view)
         nav_view.setNavigationItemSelectedListener(this)
-        FireStore().signInUser(this@MainActivity)
+       FireStore().signInUser(this@MainActivity)
     }
 
 
